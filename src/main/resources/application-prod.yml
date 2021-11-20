@@ -1,0 +1,33 @@
+app:
+  datasource:
+    main:
+      driver-class-name: net.ucanaccess.jdbc.UcanaccessDriver
+      jdbc-url: jdbc:ucanaccess://c:/accountsdb.accdb;showSchema=true
+      username:
+      password:
+      pool-size:
+
+
+server:
+  port: 8111
+  error:
+    include-binding-errors: always
+    include-message: always
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+config:
+  default:
+    http:
+      session:
+        timeout: 300
+    back-statement:
+      period: 3
+    pagination:
+      enabled: disable
+      page:
+        size: 30
+        index: 0
