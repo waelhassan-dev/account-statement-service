@@ -14,7 +14,7 @@
 
     <appender name="RollingFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGS}/switcher.log</file>
+        <file>${LOGS}/statements.log</file>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
@@ -23,7 +23,7 @@
         <rollingPolicy
                 class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily and when the file reaches 30 MegaBytes -->
-            <fileNamePattern>${LOGS}/archived/switcher-%d{yyyy-MM-dd}.%i.log
+            <fileNamePattern>${LOGS}/archived/statements-%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -36,7 +36,7 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
-        <file>${LOGS}/switcher.err</file>
+        <file>${LOGS}/statements.err</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${catalina.base}/logs/pay.%d{yyyy-ww}.%i.err</fileNamePattern>
             <maxFileSize>20MB</maxFileSize>

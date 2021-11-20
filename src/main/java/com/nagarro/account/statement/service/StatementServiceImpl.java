@@ -44,7 +44,6 @@ public class StatementServiceImpl implements StatementService {
 
         if (request.getFilter() == null || request.getFilter().getFromDate() == null || request.getFilter().getToDate() == null) {
             log.info("using default configuration - 3 months back statement");
-            System.err.println("\n filter:" + request.getFilter());
 
             StatementFilter filter = request.getFilter();
 
@@ -54,8 +53,6 @@ public class StatementServiceImpl implements StatementService {
                 filter.setToDate(LocalDate.now());
 
             request.setFilter(filter);
-
-            System.err.println("filter:" + request.getFilter());
 
         }
 
@@ -85,7 +82,7 @@ public class StatementServiceImpl implements StatementService {
     private List<Statement> getStatementWithPagination(StatementRequest request) {
 
         if (request.getPaginationRequest() == null) {
-            log.info("using default configuration - 3 months back statement");
+            log.info("using default configuration - pagination params");
             PaginationRequest pagination = new PaginationRequest();
             pagination.setPageSize(appSettings.getDefaultPaginationPageSize());
             pagination.setPageIndex(appSettings.getDefaultPaginationPageIndex());

@@ -45,6 +45,7 @@ public class StatementController {
         return new ResponseEntity<>(statementService.processRequest(request), HttpStatus.OK);
     }
 
+
     @PostMapping(value = "/admin", consumes = "application/json", produces = "application/json")
     public @ResponseBody
     ResponseEntity<StatementRequest> getParameterizeStatementsPost(@RequestBody @Valid StatementRequest request) {

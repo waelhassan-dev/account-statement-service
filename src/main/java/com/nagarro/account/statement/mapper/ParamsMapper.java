@@ -4,7 +4,6 @@ import com.nagarro.account.statement.dto.PaginationRequest;
 import com.nagarro.account.statement.dto.StatementFilter;
 import com.nagarro.account.statement.dto.StatementRequest;
 
-import java.sql.Statement;
 import java.time.LocalDate;
 
 public class ParamsMapper {

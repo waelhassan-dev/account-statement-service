@@ -31,3 +31,9 @@ config:
       page:
         size: 30
         index: 0
+
+logging:
+  level:
+    root: debug
+    web: debug
+    sql: debug
