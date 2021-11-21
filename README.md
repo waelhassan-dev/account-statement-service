@@ -14,7 +14,7 @@ For building and running the application you need:
 - [Maven 3](https://maven.apache.org)
 
 ## Running the application locally
-First of, navigate to application.yml > `jdbc-url` configuration, you will need to put the full path of MS Access repository location in your machine.
+First of, navigate to both application.yml and application-test.yml >> `jdbc-url` configuration, you will need to put the full path of MS Access repository location in your machine.
 
 Then, there are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.nagarro.account.statement.AccountStatementServiceApplication` class from your IDE.
 
