@@ -15,6 +15,7 @@ For building and running the application you need:
 
 ## Running the application locally
 First of, navigate to both application.yml and application-test.yml >> `jdbc-url` configuration, you will need to put the full path of MS Access repository location in your machine.
+Note: if you're using an old version of IDE (eclipse, intelliJ, ..) there're a Lombok plugin needed to be set up in your IDE, refer to the following link: [lombok-ide](https://www.baeldung.com/lombok-ide)
 
 Then, there are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.nagarro.account.statement.AccountStatementServiceApplication` class from your IDE.
 
