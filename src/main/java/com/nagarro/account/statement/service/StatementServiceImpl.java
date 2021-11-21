@@ -10,6 +10,7 @@ import com.nagarro.account.statement.model.Statement;
 import com.nagarro.account.statement.repository.StatementJdbcTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -38,7 +39,8 @@ public class StatementServiceImpl implements StatementService {
 
         Optional<Account> accountByAccountId = Optional.ofNullable(statementRepository.findAccountByAccountId
                 (request.getAccountId())
-                .orElseThrow(() -> new NotFoundException(String.format("no account found with id %s", request.getAccountId()))));
+                .orElseThrow(() -> new NotFoundException(HttpStatus.NOT_FOUND.value(), "404", String.format("no account found for with id %s", request.getAccountId()))));
+
 
         response.setAccount(accountByAccountId.get());
 

@@ -18,7 +18,7 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-        ErrorResponse response = new ErrorResponse("unauthorized access", 401);
+        ErrorResponse response = new ErrorResponse("unauthorized access", "401");
         response.setMessage("Access Denied");
         OutputStream out = httpServletResponse.getOutputStream();
         ObjectMapper mapper = new ObjectMapper();

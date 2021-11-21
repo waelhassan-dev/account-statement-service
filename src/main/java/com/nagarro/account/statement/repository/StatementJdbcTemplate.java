@@ -9,6 +9,7 @@ import com.nagarro.account.statement.model.Statement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -29,7 +30,7 @@ public class StatementJdbcTemplate {
             return Optional
                     .of(jdbcTemplate.query(sql, new AccountRowMapper()).get(0));
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException(String.format("no account found for with id %s", accountId));
+            throw new NotFoundException(HttpStatus.NOT_FOUND.value(), "404", String.format("no account found for with id %s", accountId));
         }
     }
 
@@ -38,7 +39,7 @@ public class StatementJdbcTemplate {
         try {
             return Optional.of(jdbcTemplate.query(sql, new StatementRowMapper())).get();
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException(String.format("no back statements found for account with id %s", statementRequest.getAccountId()));
+            throw new NotFoundException(HttpStatus.NOT_FOUND.value(), "404", String.format("no account found for with id %s", statementRequest.getAccountId()));
         }
     }
 
@@ -57,7 +58,7 @@ public class StatementJdbcTemplate {
     try {
             return Optional.ofNullable(jdbcTemplate.query(sql, new StatementRowMapper())).get();
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException(String.format("no back statements found for account with id %s", statementRequest.getAccountId()));
+            throw new NotFoundException(HttpStatus.NOT_FOUND.value(), "404", String.format("no account found for with id %s", statementRequest.getAccountId()));
         }
     }
 

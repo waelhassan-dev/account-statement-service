@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static com.nagarro.account.statement.security.ApplicationUserRole.*;
+import static com.nagarro.account.statement.security.ApplicationUserRole.ADMIN;
+import static com.nagarro.account.statement.security.ApplicationUserRole.USER;
 
 
 @Repository("test")

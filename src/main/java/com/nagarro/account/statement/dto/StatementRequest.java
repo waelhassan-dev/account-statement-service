@@ -5,6 +5,8 @@ import com.nagarro.account.statement.model.Account;
 import com.nagarro.account.statement.model.Statement;
 import lombok.Data;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -16,6 +18,7 @@ public class StatementRequest {
     private Account account;
 
     @JsonIgnore
+    @NotNull @Min(0)
     private Long accountId;
 
     public StatementRequest() {

@@ -1,13 +1,13 @@
 package com.nagarro.account.statement.security;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.google.common.collect.Sets;
-
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.nagarro.account.statement.security.ApplicationUserPermission.*;
+import static com.nagarro.account.statement.security.ApplicationUserPermission.NON_PARAMETERIZE_READ;
+import static com.nagarro.account.statement.security.ApplicationUserPermission.PARAMETERIZE_READ;
 
 
 public enum ApplicationUserRole {
