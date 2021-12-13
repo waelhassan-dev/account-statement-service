@@ -5,13 +5,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 
 import static com.nagarro.account.statement.util.SHA256Digest.digest;
 
 public class AccountRowMapper implements RowMapper<Account> {
-
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     @Override
     public Account mapRow(ResultSet resultSet, int rowNum) throws SQLException {

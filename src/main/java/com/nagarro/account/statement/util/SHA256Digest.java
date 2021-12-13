@@ -15,7 +15,7 @@ public class SHA256Digest {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 	        md.update(clearText.getBytes(StandardCharsets.UTF_8));
 	 
-	        byte byteData[] = md.digest();
+	        byte[] byteData = md.digest();
 	 	        
 	        StringBuffer sb = new StringBuffer();
 	        for (int i = 0; i < byteData.length; i++) {

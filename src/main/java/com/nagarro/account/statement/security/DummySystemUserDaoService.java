@@ -7,30 +7,30 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static com.nagarro.account.statement.security.ApplicationUserRole.ADMIN;
-import static com.nagarro.account.statement.security.ApplicationUserRole.USER;
+import static com.nagarro.account.statement.security.SystemUserRole.ADMIN;
+import static com.nagarro.account.statement.security.SystemUserRole.USER;
 
 
-@Repository("test")
-public class TestApplicationUserDaoService implements ApplicationUserDao {
+@Repository()
+public class DummySystemUserDaoService implements SystemUserDao {
 
     private final PasswordEncoder passwordEncoder;
 
-    public TestApplicationUserDaoService(PasswordEncoder passwordEncoder) {
+    public DummySystemUserDaoService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public Optional<ApplicationUser> selectApplicationUserByUsername(String username) {
+    public Optional<SystemUser> getUserByUsername(String username) {
         return getApplicationUsers()
                 .stream()
-                .filter(applicationUser -> username.equals(applicationUser.getUsername()))
+                .filter(systemUser -> username.equals(systemUser.getUsername()))
                 .findFirst();
     }
 
-    private List<ApplicationUser> getApplicationUsers() {
-        List<ApplicationUser> applicationUsers = Lists.newArrayList(
-                new ApplicationUser(
+    private List<SystemUser> getApplicationUsers() {
+        List<SystemUser> systemUsers = Lists.newArrayList(
+                new SystemUser(
                         "admin",
                         passwordEncoder.encode("admin"),
                         ADMIN.getGrantedAuthorities(),
@@ -38,7 +38,7 @@ public class TestApplicationUserDaoService implements ApplicationUserDao {
                         true,
                         true,
                         true),
-                new ApplicationUser(
+                new SystemUser(
                         "user",
                         passwordEncoder.encode("user"),
                         USER.getGrantedAuthorities(),
@@ -47,6 +47,6 @@ public class TestApplicationUserDaoService implements ApplicationUserDao {
                         true,
                         true)
         );
-        return applicationUsers;
+        return systemUsers;
     }
 }

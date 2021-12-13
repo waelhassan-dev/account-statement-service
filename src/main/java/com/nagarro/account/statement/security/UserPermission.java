@@ -1,13 +1,13 @@
 package com.nagarro.account.statement.security;
 
-public enum ApplicationUserPermission {
+public enum UserPermission {
 
-    PARAMETERIZE_READ("parameterize:read"),
-    NON_PARAMETERIZE_READ("non_parameterize:read");
+    RESTRICTED_READ("restricted:read"),
+    NON_RESTRICTED_READ("non_restricted:read");
 
     private final String permission;
 
-    ApplicationUserPermission(String permission) {
+    UserPermission(String permission) {
         this.permission = permission;
     }
 

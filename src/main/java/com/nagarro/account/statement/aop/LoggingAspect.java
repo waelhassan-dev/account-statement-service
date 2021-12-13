@@ -48,9 +48,7 @@ public class LoggingAspect {
 		
 		String theMethod = theJoinPoint.getSignature().toShortString();
 		log.info("out .. from: " + theMethod);
-		
 		log.info("outcome result: " + theResult);
-		
 	}
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -30,28 +31,29 @@ class StatementControllerTest {
     private StatementService mockStatementService;
 
     @Test
-    void testGetStatements() throws Exception {
+    @WithMockUser(username = "user")
+    void testGetStatements_userRole() throws Exception {
         // Setup
-        when(mockStatementService.processRequest(new StatementRequest(0L))).thenReturn(new StatementRequest(0L));
+        when(mockStatementService.processRequest(new StatementRequest(1L))).thenReturn(new StatementRequest(1L));
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(get("/api/v1/statements/user")
+        final MockHttpServletResponse response = mockMvc.perform(get("/api/v1/statements")
                 .param("accountId", "1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
         // Verify the results
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-//        assertThat(response.getContentAsString()).isEqualTo("expectedResponse");
     }
 
     @Test
-    void testGetParameterizeStatements_withOutPagination() throws Exception {
+    @WithMockUser(username = "admin",roles = {"ADMIN"})
+    void testGetStatements_adminRole_withOutPagination() throws Exception {
         // Setup
-        when(mockStatementService.processRequest(new StatementRequest(0L))).thenReturn(new StatementRequest(0L));
+        when(mockStatementService.processRequest(new StatementRequest(1L))).thenReturn(new StatementRequest(1L));
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(get("/api/v1/statements/admin")
+        final MockHttpServletResponse response = mockMvc.perform(get("/api/v1/statements")
                 .param("accountId", "1")
                 .param("fromDate", "2018-10-10")
                 .param("toDate", "2019-11-11")
@@ -62,16 +64,16 @@ class StatementControllerTest {
 
         // Verify the results
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        //assertThat(response.getContentAsString()).isEqualTo("expectedResponse");
     }
 
     @Test
-    void testGetParameterizeStatements_withPagination() throws Exception {
+    @WithMockUser(username = "admin",roles = {"ADMIN"})
+    void testGetStatements_adminRole_withPagination() throws Exception {
         // Setup
-        when(mockStatementService.processRequest(new StatementRequest(0L))).thenReturn(new StatementRequest(0L));
+        when(mockStatementService.processRequest(new StatementRequest(1L))).thenReturn(new StatementRequest(1L));
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(get("/api/v1/statements/admin")
+        final MockHttpServletResponse response = mockMvc.perform(get("/api/v1/statements")
                 .param("accountId", "1")
                 .param("fromDate", "2018-10-10")
                 .param("toDate", "2019-11-11")
@@ -84,23 +86,6 @@ class StatementControllerTest {
 
         // Verify the results
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        //assertThat(response.getContentAsString()).isEqualTo("expectedResponse");
-    }
-
-    @Test
-    void testGetParameterizeStatements_withOutOtherParameters() throws Exception {
-        // Setup
-        when(mockStatementService.processRequest(new StatementRequest(0L))).thenReturn(new StatementRequest(0L));
-
-        // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(get("/api/v1/statements/admin")
-                .param("accountId", "1")
-                .accept(MediaType.APPLICATION_JSON))
-                .andReturn().getResponse();
-
-        // Verify the results
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        //assertThat(response.getContentAsString()).isEqualTo("expectedResponse");
     }
 
 }

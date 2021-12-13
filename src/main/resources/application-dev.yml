@@ -1,3 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+server:
+  port: 8112
+
 app:
   datasource:
     main:
@@ -8,32 +16,19 @@ app:
       pool-size:
 
 
-server:
-  port: 8111
-  error:
-    include-binding-errors: always
-    include-message: always
-
-spring:
-  config:
-    activate:
-      on-profile: dev, default
-
 config:
   default:
     http:
       session:
         timeout: 300
+        concurrent:
+          max: 1
+
     back-statement:
       period: 3
+
     pagination:
       enabled: disable
       page:
         size: 30
         index: 1
-
-logging:
-  level:
-    root: debug
-    web: debug
-    sql: debug

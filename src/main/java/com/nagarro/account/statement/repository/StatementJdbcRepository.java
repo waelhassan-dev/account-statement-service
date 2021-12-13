@@ -9,7 +9,6 @@ import com.nagarro.account.statement.model.Statement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,31 +17,34 @@ import java.util.Optional;
 
 
 @Repository
-public class StatementJdbcTemplate {
+public class StatementJdbcRepository implements StatementRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
 
+    @Override
     public Optional<Account> findAccountByAccountId(Long accountId) {
         String sql = "SELECT * FROM account WHERE ID = " + accountId + ";";
         try {
             return Optional
                     .of(jdbcTemplate.query(sql, new AccountRowMapper()).get(0));
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException(HttpStatus.NOT_FOUND.value(), "404", String.format("no account found for with id %s", accountId));
+            throw new NotFoundException(String.format("no account found for with id %s", accountId));
         }
     }
 
+    @Override
     public List<Statement> findStatementByAccountId(StatementRequest statementRequest) {
         String sql = "SELECT * FROM statement WHERE account_id = " + statementRequest.getAccountId() + ";";
         try {
             return Optional.of(jdbcTemplate.query(sql, new StatementRowMapper())).get();
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException(HttpStatus.NOT_FOUND.value(), "404", String.format("no account found for with id %s", statementRequest.getAccountId()));
+            throw new NotFoundException(String.format("no account found for with id %s", statementRequest.getAccountId()));
         }
     }
 
+    @Override
     public List<Statement> findStatementByAccountIdWithPagination(StatementRequest statementRequest) {
 
         //TODO: adding sorting to pagination
@@ -58,7 +60,7 @@ public class StatementJdbcTemplate {
     try {
             return Optional.ofNullable(jdbcTemplate.query(sql, new StatementRowMapper())).get();
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException(HttpStatus.NOT_FOUND.value(), "404", String.format("no account found for with id %s", statementRequest.getAccountId()));
+            throw new NotFoundException(String.format("no account found for with id %s", statementRequest.getAccountId()));
         }
     }
 
