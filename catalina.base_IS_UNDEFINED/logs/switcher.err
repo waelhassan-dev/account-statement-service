@@ -1,2 +1,0 @@
-21-11 01:05:42.654 [http-nio-8111-exec-1] WARN  org.apache.catalina.util.SessionIdGeneratorBase :: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,647] milliseconds.
-21-11 01:08:57.462 [http-nio-8111-exec-1] WARN  org.apache.catalina.util.SessionIdGeneratorBase :: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,823] milliseconds.
